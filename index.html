@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hound Dogs - A Home Away From Home For Your Dog</title>
+    <title>Hound Dogs Hotel - A Home Away From Home For Your Dog</title>
     <style>
         /* Color scheme based on your branding */
         :root {
-            --primary-pink: #e52a5a;
-            --primary-orange: #f48e4c;
-            --light-pink: #fceff4;
+            --primary-orange: #ff8a4c; /* New primary color matching logo */
+            --primary-pink: #ff8a4c; /* Replaced with orange */
+            --light-pink: #fff1e9; /* Lightened to match orange */
             --dark-text: #333333;
             --light-text: #ffffff;
             --gold: #d4af37;
             --gallery-green: #4a6f57;
         }
         
+        /* Mobile layout fixes - remove unwanted borders */
         body {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             margin: 0;
@@ -24,24 +25,26 @@
             color: var(--dark-text);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            width: 100%;
+            box-sizing: border-box;
         }
         
-        /* Navigation */
-        header {
-            background-color: #000;
-            color: var(--light-text);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        /* All sections to have consistent margins */
+        section {
+            width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
         }
         
+        /* Container standardization */
         .container {
-            width: 85%;
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
         }
         
         .logo {
@@ -52,8 +55,18 @@
         }
         
         .logo img {
-            max-width: 180px;
+            max-width: 250px; /* Increased from 180px */
             height: auto;
+        }
+        
+        /* CHANGED: Header background to black */
+        header {
+            background-color: #000;
+        }
+        
+        nav {
+            position: relative;
+            padding: 10px 0; /* Added padding for better visibility of hamburger menu */
         }
         
         nav ul {
@@ -62,6 +75,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
+            transition: all 0.3s ease;
         }
         
         nav ul li {
@@ -72,10 +86,10 @@
         nav ul li a {
             color: var(--light-text);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
             transition: color 0.3s;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             letter-spacing: 1px;
         }
         
@@ -100,47 +114,98 @@
             width: 100%;
         }
         
-        /* Hero section */
+        /* Hamburger Menu - FIXED */
+        .hamburger-container {
+            display: none;
+            position: fixed; /* Changed from absolute to fixed */
+            top: 15px;
+            right: 15px;
+            background-color: #000;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 9999; /* Extremely high z-index to ensure visibility */
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Added shadow for visibility */
+        }
+        
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 20px;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-right: 8px;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-text {
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        /* Hero section - Added max-width to prevent any potential overflow issues */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('image/1.jpg') no-repeat center center;
+            background: url('image/1.jpg') no-repeat center center;
             background-size: cover;
             color: white;
             text-align: center;
-            padding: 280px 20px;
+            padding: 220px 20px;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
         
-        /* Hero paw prints animation */
+        /* Subtle dark overlay to make text readable */
         .hero::before {
-            content: '🐾';
+            content: '';
             position: absolute;
-            font-size: 5rem;
-            bottom: 20px;
-            left: 10%;
-            opacity: 0.3;
-            animation: pawWalk 15s linear infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            pointer-events: none;
         }
         
-        @keyframes pawWalk {
-            0% { transform: translateX(0) rotate(10deg); }
-            100% { transform: translateX(1000px) rotate(-10deg); }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
             letter-spacing: 1px;
             animation: fadeInDown 1s ease-out;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
         .hero p {
-            font-size: 1.3rem;
+            font-size: 2rem;
             max-width: 800px;
-            margin: 0 auto 2rem;
-            font-weight: 300;
+            margin: 0 auto 2.5rem;
+            font-weight: 400;
             animation: fadeInUp 1s ease-out;
+            position: relative;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
         
         @keyframes fadeInDown {
@@ -157,16 +222,18 @@
             display: inline-block;
             background-color: var(--primary-pink);
             color: white;
-            padding: 14px 34px;
+            padding: 16px 36px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1.1rem;
             text-transform: uppercase;
             transition: all 0.3s;
             letter-spacing: 1px;
             box-shadow: 0 4px 12px rgba(229, 42, 90, 0.3);
             position: relative;
             overflow: hidden;
+            z-index: 5;
         }
         
         /* Button shimmer effect */
@@ -191,7 +258,258 @@
             left: 100%;
         }
         
-        /* Services section */
+        /* Welcome to Hound Dogs Section */
+        .hotel {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        /* Background pattern */
+        .hotel::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><circle cx="10" cy="10" r="3" fill="%23fceff4" /><circle cx="18" cy="8" r="3" fill="%23fceff4" /><circle cx="2" cy="18" r="3" fill="%23fceff4" /><circle cx="8" cy="18" r="3" fill="%23fceff4" /><path d="M5,25 Q10,20 15,25" stroke="%23fceff4" fill="none" stroke-width="2" /></svg>');
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hotel-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hotel-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            position: relative;
+            max-width: 600px;
+            height: 500px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hotel-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .hotel-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .hotel-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(0,0,0,0.05);
+            pointer-events: none;
+            border-radius: 15px;
+        }
+        
+        .hotel-text {
+            flex: 1;
+        }
+        
+        .hotel-text p {
+            margin-bottom: 18px;
+            font-size: 1.35rem;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        
+        .hotel-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .hotel-text strong {
+            color: var(--primary-pink);
+        }
+        
+        /* Enhanced Gallery Carousel */
+        .gallery-section {
+            background-color: #ff8a4c; /* Changed to orange */
+            padding: 60px 0;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        
+        /* Add a subtle pattern overlay */
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="1" fill="white" opacity="0.1"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            padding: 0 0 30px;
+            position: relative;
+        }
+        
+        .gallery-title h2 {
+            color: #f5f5f5;
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin: 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gallery-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: rgba(255,255,255,0.6);
+            border-radius: 3px;
+        }
+
+        /* Carousel Container with improved styling */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        /* Gallery Carousel */
+        .gallery-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        
+        .gallery-item {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 1/1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+        
+        .gallery-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 6px;
+            box-sizing: border-box;
+            background-color: #fceff4;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+            transition: transform 0.4s ease;
+        }
+        
+        /* Better visibility for gallery navigation buttons */
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+            z-index: 10;
+            left: 15px;
+            color: var(--primary-pink);
+        }
+        
+        .carousel-button:hover {
+            background-color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-next {
+            left: auto;
+            right: 15px;
+        }
+        
+        /* Enhanced Gallery Carousel Indicators - also using bars */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .carousel-indicator {
+            width: 35px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 3px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicator.active {
+            background-color: white;
+            width: 45px;
+        }
+        
+        /* Services section - Placed after gallery */
         .services {
             padding: 100px 0;
             text-align: center;
@@ -203,8 +521,8 @@
             display: inline-block;
             margin-bottom: 50px;
             color: var(--primary-pink);
-            font-size: 2.5rem;
-            font-weight: 600;
+            font-size: 3rem;
+            font-weight: 700;
         }
         
         .section-heading::after {
@@ -240,7 +558,7 @@
         }
         
         .service-header {
-            background-color: var(--primary-pink);
+            background-color: #ff8a4c; /* Changed to orange */
             padding: 25px 20px;
             color: white;
             text-align: center;
@@ -263,7 +581,7 @@
         
         .service-header h3 {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -301,12 +619,13 @@
             font-weight: 500;
             color: var(--dark-text);
             text-align: left;
+            font-size: 1.3rem;
         }
         
         .price-value {
             font-weight: 600;
             color: var(--primary-pink);
-            font-size: 1.1rem;
+            font-size: 1.4rem;
         }
         
         .service-footer {
@@ -352,196 +671,22 @@
         }
         
         .trial-note p {
-            margin: 0 0 10px 0;
-            font-size: 1rem;
+            margin: 0 0 12px 0;
+            font-size: 1.3rem;
             line-height: 1.6;
+            text-align: justify;
         }
         
         .trial-note p:last-child {
             margin-bottom: 0;
         }
         
-        /* Improved Gallery with Square Frames */
-.gallery-section {
-    background-color: #e52a5a; /* The darker pink from your theme */
-    padding: 60px 0;
-    position: relative;
-}
-
-.gallery-title {
-    text-align: center;
-    padding: 0 0 30px;
-}
-
-.gallery-title h2 {
-    color: #f5f5f5;
-    font-size: 2.5rem;
-    font-weight: 300;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    margin: 0;
-}
-
-/* Square grid layout */
-.gallery-grid {
-    width: 95%;
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-}
-
-/* Square gallery items - all the same size */
-.gallery-item {
-    aspect-ratio: 1/1; /* Perfect square */
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.gallery-frame {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 6px;
-    box-sizing: border-box;
-    background-color: #fceff4; /* Light pink from your theme */
-}
-
-.gallery-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 6px;
-    transition: transform 0.4s ease;
-}
-
-.gallery-item:hover .gallery-image {
-    transform: scale(1.05);
-}
-
-/* Media Queries for Responsive Layout */
-@media (max-width: 1200px) {
-    .gallery-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 991px) {
-    .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-}
-        
-        /* About section */
-        .about {
-            padding: 100px 0;
-            background-color: white;
-            position: relative;
-        }
-        
-        /* Background paw print pattern */
-        .about::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><circle cx="10" cy="10" r="3" fill="%23fceff4" /><circle cx="18" cy="8" r="3" fill="%23fceff4" /><circle cx="2" cy="18" r="3" fill="%23fceff4" /><circle cx="8" cy="18" r="3" fill="%23fceff4" /><path d="M5,25 Q10,20 15,25" stroke="%23fceff4" fill="none" stroke-width="2" /></svg>');
-            background-size: 50px 50px;
-            opacity: 0.1;
-            z-index: 0;
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .about-image {
-            flex: 1;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            position: relative;
-            max-width: 600px;
-            height: 500px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .about-image:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            transition: transform 0.5s;
-        }
-        
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        .about-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 1px solid rgba(0,0,0,0.05);
-            pointer-events: none;
-            border-radius: 15px;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-text p {
-            margin-bottom: 15px;
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-        
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-        
-        .about-text strong {
-            color: var(--primary-pink);
-        }
-        
-        /* Reviews section */
+        /* Reviews Section - FIXED */
         .reviews {
             padding: 100px 0;
-            text-align: center;
             background-color: #f9f9f9;
             position: relative;
+            text-align: center;
         }
         
         .reviews::before {
@@ -566,74 +711,151 @@
             right: -150px;
         }
         
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+        /* FIXED: Simple Card Slider for Reviews */
+        .review-slider-container {
             position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 0 60px; /* Increased bottom padding for nav buttons */
+        }
+        
+        .review-slider {
+            position: relative;
+            overflow: visible; /* Changed from hidden to visible */
+            min-height: 250px; /* Set a minimum height */
+            border-radius: 15px;
+        }
+        
+        .review-slide {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            height: auto; /* Let content determine height */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-bottom: 60px; /* Added more padding for author name and buttons */
+        }
+        
+        .review-slide.active {
+            opacity: 1;
             z-index: 1;
+            position: relative; /* Changed from absolute to relative when active */
         }
         
         .review-card {
             background-color: white;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
+            width: 90%;
+            max-width: 700px;
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Added slight shadow */
+            text-align: left;
         }
         
-        .review-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
-        
-        .review-card::before {
-            content: '"';
+        .review-card::after {
+            content: '';
             position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 120px;
-            line-height: 1;
-            color: rgba(229, 42, 90, 0.1);
-            font-family: Georgia, serif;
+            bottom: -15px;
+            left: 30px;
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: white transparent transparent;
+            display: block;
+            width: 0;
         }
         
         .review-stars {
             color: #FFD700;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        
+        .review-service-date {
+            font-size: 0.85rem;
+            color: #777;
             margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .review-content {
-            position: relative;
-            z-index: 1;
             font-style: italic;
-            line-height: 1.7;
         }
         
+        /* FIXED: Remove max-height and scrolling from review content */
+        .review-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            max-height: none; /* Remove the height limitation */
+            overflow-y: visible; /* Remove scrolling */
+            color: #333;
+        }
+        
+        /* FIXED: Position author better */
         .review-author {
             font-weight: 600;
-            margin-top: 20px;
-            position: relative;
-            z-index: 1;
             color: var(--primary-pink);
-            display: inline-block;
+            margin-top: 5px;
+            position: absolute;
+            bottom: -30px;
+            left: 30px;
         }
         
-        .review-author::after {
-            content: '';
+        /* FIXED: Move slider controls to bottom */
+        .review-btn {
             position: absolute;
-            width: 30px;
-            height: 2px;
-            background-color: var(--primary-orange);
-            bottom: -5px;
-            left: 0;
+            bottom: 10px; /* Position at bottom */
+            top: auto; /* Remove top positioning */
+            transform: none; /* Remove transform */
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-orange); /* Changed to orange */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .review-btn:hover {
+            background-color: var(--primary-pink);
+            transform: scale(1.1);
+        }
+        
+        .review-prev {
+            left: calc(50% - 50px); /* Position left of center */
+        }
+        
+        .review-next {
+            right: calc(50% - 50px); /* Position right of center */
+        }
+        
+        /* Slider Controls */
+        .review-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .review-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .review-dot.active {
+            background-color: var(--primary-pink);
+            transform: scale(1.2);
         }
         
         /* FAQ section - Enhanced accordion */
@@ -663,7 +885,7 @@
         
         .faq-question {
             font-weight: 600;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--primary-pink);
             display: flex;
@@ -688,6 +910,8 @@
             overflow: hidden;
             transition: max-height 0.5s ease, opacity 0.3s ease;
             opacity: 0;
+            font-size: 1.35rem;
+            text-align: justify;
         }
         
         .faq-item.active .faq-answer {
@@ -797,13 +1021,13 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: #e52a5a;
+            background-color: #ff8a4c; /* Changed to orange */
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
-            box-shadow: 0 3px 10px rgba(229, 42, 90, 0.2);
+            box-shadow: 0 3px 10px rgba(255, 138, 76, 0.2);
         }
 
         .contact-icon svg {
@@ -813,7 +1037,7 @@
 
         .contact-info-text {
             font-weight: 500;
-            font-size: 1.05rem;
+            font-size: 1.35rem;
         }
         
         .contact-text {
@@ -823,6 +1047,8 @@
         
         .contact-text p {
             margin-bottom: 20px;
+            font-size: 1.35rem;
+            text-align: justify;
         }
         
         .contact-btn {
@@ -862,6 +1088,66 @@
             left: 100%;
         }
         
+        /* Terms & Conditions Section */
+        .terms-section {
+            padding: 60px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .terms-toggle {
+            display: block;
+            margin: 10px auto;
+            background-color: var(--primary-pink);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .terms-toggle:hover {
+            background-color: var(--primary-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(244, 142, 76, 0.3);
+        }
+        
+        .terms-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease, margin 0.3s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+        
+        .terms-content.active {
+            max-height: 4000px;
+            opacity: 1;
+            margin-top: 40px;
+        }
+        
+        .terms-content h2 {
+            color: var(--primary-pink);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .terms-content h3 {
+            color: var(--primary-pink);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .terms-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
         /* Footer with improved social links */
         footer {
             background-color: #000;
@@ -875,7 +1161,7 @@
         }
         
         .footer-logo img {
-            max-width: 150px;
+            max-width: 220px; /* Increased from 150px */
             transition: transform 0.3s ease;
         }
         
@@ -895,7 +1181,7 @@
             text-decoration: none;
             margin: 10px 15px;
             transition: all 0.3s;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
@@ -920,7 +1206,7 @@
             width: 100%;
         }
         
-        /* Updated Social Links */
+        /* Updated Social Links with hover effects */
         .social-links {
             display: flex;
             justify-content: center;
@@ -932,17 +1218,36 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: #e52a5a;
+            background-color: #ff8a4c; /* Changed to orange */
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 80%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .social-icon:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.1);
+            background-color: var(--primary-orange);
+        }
+        
+        .social-icon:hover::before {
+            opacity: 1;
         }
 
         .social-icon svg {
@@ -951,14 +1256,14 @@
         }
         
         .copyright {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: #aaa;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 30px;
             margin-top: 30px;
         }
         
-        /* Back to top button with improved animation */
+        /* Enhanced back to top button with particle effect */
         .back-to-top {
             position: fixed;
             bottom: 20px;
@@ -977,6 +1282,19 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             z-index: 999;
+            overflow: hidden;
+        }
+        
+        .back-to-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .back-to-top.visible {
@@ -986,22 +1304,31 @@
         
         .back-to-top:hover {
             transform: scale(1.1);
+            background-color: var(--primary-orange);
+        }
+        
+        .back-to-top:hover::before {
+            opacity: 1;
         }
         
         /* Media Queries for Responsive Layout */
         @media (max-width: 1200px) {
-            .about-image {
+            .hotel-image {
                 max-width: 500px;
                 height: 450px;
+            }
+            
+            .hero h1 {
+                font-size: 4rem;
             }
         }
         
         @media (max-width: 991px) {
-            .about-content {
+            .hotel-content {
                 flex-direction: column;
             }
             
-            .about-image {
+            .hotel-image {
                 margin: 0 auto 40px;
                 width: 100%;
                 max-width: 500px;
@@ -1021,75 +1348,145 @@
                 max-width: 600px;
             }
             
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .carousel-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                left: 20px;
             }
             
-            .gallery-item.wide {
-                grid-column: span 2;
-            }
-            
-            /* Adjust aspect ratios for tablet */
-            #item4, #item6, #item7, #item8, #item10 {
-                aspect-ratio: 3/2;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul li {
-                margin: 5px 0;
+            .carousel-next {
+                left: auto;
+                right: 20px;
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Additional mobile fixes - IMPROVED */
+        @media (max-width: 768px) {
+            /* Hamburger menu styles for mobile - FIXED */
+            .hamburger-container {
+                display: flex !important; /* Force display with !important */
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateY(-100%);
+                z-index: 9000; /* High but below hamburger */
+                transition: transform 0.3s ease;
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+            }
+            
+            .hamburger-container.active .hamburger span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger-container.active .hamburger span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger-container.active .hamburger span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.6rem;
             }
             
             .contact-info {
                 padding: 40px 30px;
             }
             
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .gallery-item.wide {
-                grid-column: span 1;
-            }
-            
-            /* Adjust aspect ratios for mobile */
-            .gallery-item, #item1, #item2, #item3, #item5, #item9 {
-                aspect-ratio: 16/9;
-            }
-            
-            .about-image {
+            .hotel-image {
                 height: 400px;
             }
             
             .section-heading {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+            
+            /* Better positioning for mobile carousel controls */
+            .carousel-indicator {
+                width: 25px;
+                height: 4px;
+                margin: 0 4px;
+            }
+            
+            .review-dot {
+                width: 10px;
+                height: 10px;
+                margin: 0 4px;
+            }
+            
+            /* Make carousel buttons more accessible on mobile */
+            .carousel-button, .review-btn {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .carousel-button {
+                left: 5px;
+            }
+            
+            .carousel-next {
+                right: 5px;
+                left: auto;
+            }
+            
+            .review-card {
+                padding: 25px 20px;
+            }
+            
+            .hotel-text p, .trial-note p, .faq-answer, .contact-text p, .review-content {
+                font-size: 1.2rem;
+            }
+            
+            /* Remove any potential border issues */
+            body, html, section, .container, .hero, .gallery-section, .reviews, .hotel, .services, .faq, .contact {
+                max-width: 100%;
+                overflow-x: hidden;
+                box-sizing: border-box;
             }
         }
         
+        /* Additional small screen fixes */
         @media (max-width: 576px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1.4rem;
             }
             
             .btn, .contact-btn {
                 padding: 12px 28px;
-                font-size: 0.9rem;
+                font-size: 1rem;
             }
             
-            .about-image {
+            .hotel-image {
                 height: 350px;
             }
             
@@ -1106,22 +1503,76 @@
                 width: 20px;
                 height: 20px;
             }
+            
+            /* Smaller carousel buttons on very small screens */
+            .carousel-button, .review-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+            
+            .carousel-button {
+                left: 5px;
+            }
+            
+            .carousel-next {
+                right: 5px;
+            }
+            
+            .section-heading {
+                font-size: 2.2rem;
+            }
+            
+            .hotel-text p, .trial-note p, .faq-answer, .contact-text p, .review-content {
+                font-size: 1.1rem;
+            }
+            
+            /* Fix any potential border issues on small screens */
+            body, html, header, .container, section, .hero, .gallery-section, .gallery-item, .hotel, .services {
+                max-width: 100vw;
+                overflow-x: hidden;
+                box-sizing: border-box;
+            }
+            
+            /* Smaller, tighter indicator bars */
+            .carousel-indicator, .review-dot {
+                width: 20px;
+                height: 3px;
+                margin: 0 3px;
+            }
+            
+            .review-dot {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .carousel-indicator.active {
+                width: 30px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <!-- Header and Navigation -->
+    <!-- Header and Navigation with Improved Hamburger Menu -->
     <header>
         <div class="container">
             <div class="logo">
-                <img src="image/2.jpg" alt="Hound Dogs Logo">
+                <img src="image/HOUND (4).png" alt="Hound Dogs Logo">
             </div>
             <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Our Services</a></li>
+                <div class="hamburger-container" id="hamburger-menu">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="menu-text">MENU</div>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="#hotel">About Us</a></li>
                     <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
                     <li><a href="#reviews">Testimonials</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -1139,7 +1590,64 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Welcome to Hound Dogs Section - UPDATED LAYOUT -->
+    <section id="hotel" class="hotel">
+        <div class="container">
+            <h2 class="section-heading">Welcome to Hound Dogs</h2>
+            
+            <div class="hotel-content" style="display: flex; flex-direction: row; align-items: flex-start; gap: 40px;">
+                <!-- Left column: Orange text and Image -->
+                <div style="flex: 1;">
+                    <!-- Orange text with proper justification -->
+                    <p style="color: #ff8a4c; font-weight: bold; font-size: 1.35rem; margin-bottom: 30px; text-align: justify;">
+                        Welcome to our home from home boarding and day care. We provide a warm and nurturing environment where your furry friends can feel safe and loved while you're away. We ensure that every dog receives personalised care, plenty of playtime, and lots of cuddles. Trust us to treat your pets like family.
+                    </p>
+                    
+                    <!-- Image below orange text -->
+                    <div class="hotel-image" style="max-width: 100%;">
+                        <img src="image/gandlu.jpg" alt="Our cozy dog boarding facility" style="width: 100%;">
+                    </div>
+                </div>
+                
+                <!-- Right column: Black text starting from top -->
+                <div class="hotel-text" style="flex: 1;">
+                    <p>My name is Georgie, and along with my dog Luna, we provide a loving, comfortable, and safe environment for your dogs when you're away. Our home is your dog's home—a place where they can relax, play, and receive the individual attention they deserve.</p>
+                    
+                    <p>Unlike large boarding facilities, we take a limited number of dogs at a time to ensure each pet receives personal care tailored to their unique needs and personality. We believe that maintaining your dog's regular routine is essential for their happiness and well-being.</p>
+                    
+                    <p>Our home features a secure garden where your furry friends can play and explore safely. Inside, they'll enjoy cosy sleeping areas and plenty of toys to keep them entertained.</p>
+                    
+                    <p>We're fully insured and have years of experience caring for dogs of all breeds, ages, and temperaments. Your peace of mind is as important to us as your dog's happiness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section with Enhanced Carousel -->
+    <section id="gallery" class="gallery-section">
+        <div class="gallery-title">
+            <h2>Our Furry Guests</h2>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="gallery-carousel" id="gallery-carousel">
+                <!-- Gallery slides will be generated by JavaScript -->
+            </div>
+            
+            <button class="carousel-button carousel-prev" aria-label="Previous image">
+                &#10094;
+            </button>
+            <button class="carousel-button carousel-next" aria-label="Next image">
+                &#10095;
+            </button>
+            
+            <div class="carousel-indicators" id="gallery-indicators">
+                <!-- Indicators will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - Placed after gallery -->
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-heading">Our Services</h2>
@@ -1197,152 +1705,27 @@
         </div>
     </section>
 
-    /* Gallery HTML */
-<!-- Gallery Section - With uniform square frames -->
-<section id="gallery" class="gallery-section">
-    <div class="gallery-title">
-        <h2>Our Furry Guests</h2>
-    </div>
-    
-    <div class="gallery-grid">
-        <!-- Original images with corrected filenames -->
-        <div class="gallery-item" id="item1">
-            <div class="gallery-frame">
-                <img src="image/20220518_190734.jpg" alt="Small Dog on Couch" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item2">
-            <div class="gallery-frame">
-                <img src="image/20240809-DSC00856.jpg" alt="White Dog Close-up" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item3">
-            <div class="gallery-frame">
-                <img src="image/20250105_125527.jpg" alt="Yellow Dog Outside" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item4">
-            <div class="gallery-frame">
-                <img src="image/20240720-DSC00687.jpg" alt="Brown Dog Portrait" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item5">
-            <div class="gallery-frame">
-                <img src="image/20230511_122506.jpg" alt="Two Dogs Together" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item6">
-            <div class="gallery-frame">
-                <img src="image/20240722-DSC00715.jpg" alt="Dog on Beach" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item7">
-            <div class="gallery-frame">
-                <img src="image/20250114-DSC01240-2.jpg" alt="White Dog Portrait" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item8">
-            <div class="gallery-frame">
-                <img src="image/20240722-DSC00706.jpg" alt="Climbing Dog" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item9">
-            <div class="gallery-frame">
-                <img src="image/20250208-DSC01420.jpg" alt="Dog Close-up" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item10">
-            <div class="gallery-frame">
-                <img src="image/20240809-DSC00811.jpg" alt="Golden Dogs" class="gallery-image">
-            </div>
-        </div>
-        
-        <!-- New images with corrected file paths -->
-        <div class="gallery-item" id="item11">
-            <div class="gallery-frame">
-                <img src="image/20250103_155112.jpg" alt="Dog Portrait" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item12">
-            <div class="gallery-frame">
-                <img src="image/20250103_153630.jpg" alt="Dog Photo" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item13">
-            <div class="gallery-frame">
-                <img src="image/20240901_162811.jpg" alt="Dog Closeup" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item14">
-            <div class="gallery-frame">
-                <img src="image/20230610_173853.jpg" alt="Dog Outdoor" class="gallery-image">
-            </div>
-        </div>
-        
-        <div class="gallery-item" id="item15">
-            <div class="gallery-frame">
-                <img src="image/20241226_222600.jpg" alt="Happy Dog" class="gallery-image">
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- About Us Section with new image -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-heading">About Us</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="image/20241226_222600.jpg" alt="Our cozy dog boarding facility">
-                </div>
-                <div class="about-text">
-                    <p><strong>Welcome to our home from home boarding and day care. We provide a warm and nurturing environment where your furry friends can feel safe and loved while you're away. We ensure that every dog receives personalised care, plenty of playtime, and lots of cuddles. Trust us to treat your pets like family.</strong></p>
-                    <p>My name is [Your Name], and along with my dog Luna, we provide a loving, comfortable, and safe environment for your dogs when you're away. Our home is your dog's home—a place where they can relax, play, and receive the individual attention they deserve.</p>
-                    <p>Unlike large boarding facilities, we take a limited number of dogs at a time to ensure each pet receives personal care tailored to their unique needs and personality. We believe that maintaining your dog's regular routine is essential for their happiness and well-being.</p>
-                    <p>Our home features a secure garden where your furry friends can play and explore safely. Inside, they'll enjoy cosy sleeping areas and plenty of toys to keep them entertained.</p>
-                    <p>We're fully insured and have years of experience caring for dogs of all breeds, ages, and temperaments. Your peace of mind is as important to us as your dog's happiness.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
+    <!-- Reviews Section with Simple Card Carousel - FIXED -->
     <section id="reviews" class="reviews">
         <div class="container">
             <h2 class="section-heading">Happy Dog Parents</h2>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-content">"Georgina did us a massive favour by having Murphy on a very last minute booking! It was so appreciated that she could squeeze us in. Georgina was great at communicating throughout the day & we even got some lovely pictures from Murphy’s day out. Would 100% use again! Thank you!"</p>
-                    <div class="review-author">Emily B</div>
+            
+            <div class="review-slider-container">
+                <div class="review-slider" id="review-slider">
+                    <!-- All reviews will be generated by JavaScript -->
                 </div>
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-content">"Lenny looked at home right away, and after picking him up we already made arrangements to re book him here again 😀"</p>
-                    <div class="review-author">Adam F</div>
-                </div>
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-content">"We left Ruby for a day with Georgina - and she had a great time. Georgina is professional with great communication, offering a meet/greet before the day which is always helpful. Ruby had a fantastic day with Georgina, and Luna. She didn’t want to leave, and is already looking forward to another visit/stay."</p>
-                    <div class="review-author">Bijal R</div>
+                
+                <button class="review-btn review-prev" aria-label="Previous review">❮</button>
+                <button class="review-btn review-next" aria-label="Next review">❯</button>
+                
+                <div class="review-nav" id="review-nav">
+                    <!-- Dots will be generated by JavaScript -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section - Enhanced with smooth animations -->
+    <!-- FAQ Section -->
     <section id="faq" class="faq">
         <div class="container">
             <h2 class="section-heading">Frequently Asked Questions</h2>
@@ -1391,81 +1774,136 @@
         </div>
     </section>
 
-    <!-- Contact Section with image on LEFT and text on RIGHT -->
-<section id="contact" class="contact">
-    <div class="container">
-        <div class="contact-container">
-            <div class="contact-grid">
-                <!-- Image now comes first in the grid -->
-                <div class="contact-image">
-                    <img src="image/20250103_155112.jpg" alt="Dog raising paws">
-                </div>
-                
-                <!-- Contact info now comes second -->
-                <div class="contact-info">
-                    <h2 class="contact-heading">Book A Free Trial</h2>
-                    
-                    <div class="contact-details">
-                        <div class="contact-detail">
-                            <div class="contact-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            </div>
-                            <div class="contact-info-text">info@hounddogscare.co.uk</div>
-                        </div>
-                        
-                        <div class="contact-detail">
-                            <div class="contact-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            </div>
-                            <div class="contact-info-text">07525 927435</div>
-                        </div>
-                        
-                        <div class="contact-detail">
-                            <div class="contact-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            </div>
-                            <div class="contact-info-text">Abington, Northampton, NN1</div>
-                        </div>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-grid">
+                    <div class="contact-image">
+                        <img src="image/20250103_155112.jpg" alt="Dog raising paws">
                     </div>
-                    
-                    <div class="contact-text">
-                        <p>A trial session is required for all new clients. This is a free session for you and your Dog to you visit our home and meet Luna, you can then leave your Dog with us for 2 hours so we can monitor their behaviour in a new environment and ensure they are happy to be without you during their session.</p>
-                        <p>Some dogs take longer than others to feel comfortable in new surroundings and when meeting new people so a second session may be necessary before a booking is confirmed.</p>
-                        <a href="mailto:info@hounddogscare.co.uk" class="contact-btn">Book Your Free Trial</a>
+                    <div class="contact-info">
+                        <h2 class="contact-heading">Book A Free Trial</h2>
+                        
+                        <div class="contact-details">
+                            <div class="contact-detail">
+                                <div class="contact-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                </div>
+                                <div class="contact-info-text">info@hounddogscare.co.uk</div>
+                            </div>
+                            
+                            <div class="contact-detail">
+                                <div class="contact-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </div>
+                                <div class="contact-info-text">07525 927435</div>
+                            </div>
+                            
+                            <div class="contact-detail">
+                                <div class="contact-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                </div>
+                                <div class="contact-info-text">Abington, Northampton, NN1</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-text">
+                            <p>A trial session is required for all new clients. This is a free session for you and your Dog to you visit our home and meet Luna, you can then leave your Dog with us for 2 hours so we can monitor their behaviour in a new environment and ensure they are happy to be without you during their session.</p>
+                            <p>Some dogs take longer than others to feel comfortable in new surroundings and when meeting new people so a second session may be necessary before a booking is confirmed.</p>
+                            <a href="mailto:info@hounddogscare.co.uk" class="contact-btn">Book Your Free Trial</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    
+    <!-- Terms & Conditions Section -->
+    <section id="terms-section" class="terms-section">
+        <div class="container">
+            <button id="terms-toggle" class="terms-toggle">View Terms & Conditions</button>
+            <div id="terms-content" class="terms-content">
+                <h2>Terms & Conditions</h2>
+                <p>Welcome to Home Dogs boarding and day care! To ensure the best experience for your Dog, please take a moment to review our booking terms and conditions.</p>
+                
+                <h3>PAYMENT</h3>
+                <p>Bank Account Name: Georgina Hodges<br>
+                SORT CODE: 60-83-71<br>
+                ACCOUNT NUMBER: 19814101</p>
+                
+                <h3>BOARDING DEPOSIT</h3>
+                <p>We're excited to have your furry friend stay with us! To reserve their spot, we ask for a small deposit:</p>
+                <p>£35 for Adult dogs (over 1 year old)<br>
+                £40 for Puppies (under 1 years old) who need a little extra attention!</p>
+                
+                <p>To make sure everything's organised for your pup's stay:</p>
+                <p>Please send your deposit within 7 days of booking acceptance. The remaining balance is due 21 days before your dog's holiday with us begins alternatively you can make full payment with the same refund policy.</p>
+                
+                <p>We understand plans can change! If you need to cancel you will receive a full refund of your deposit/full payment if you let us know more than 21 days before their stay. Because we keep spaces limited to give each dog plenty of attention, we are unable refund deposits/payments for cancellations within 21 days.</p>
+                
+                <h3>DAYCARE</h3>
+                <p>Payment is due when you book their spot. We just ask for 5 days cancellation notice for a refund.</p>
+                
+                <h3>THIRD PARTY BOOKINGS</h3>
+                <p>Follow Rover Payment Terms & Conditions.</p>
+                
+                <h3>VACCINATIONS</h3>
+                <p>Distemper, Viral Hepatitis, Leptospirosis, Parvo Virus and Para Influenza. All dogs must be up to date with their vaccinations, worming, tick and flea treatments. You must provide Hound Dogs with your dog's vaccination card before your dog's stay. Failure to provide the vaccination card or if your dog's vaccinations are not up to date, unfortunately Hound Dogs will refuse your dog's stay for the safety of other dogs.</p>
+                
+                <p>You agree that if your dog attacks, or is involved in a fight with, another dog (and/or person) causing injury to that dog (and /or person), you will be responsible for any losses incurred as a result including, but not limited to, payment of veterinary fees in respect of injuries to another animal caused by your dog.</p>
+                
+                <p>We recommend but do not insist that your dog be insured against sickness, accident, or injury and for third party liability prior to boarding.</p>
+                
+                <h3>EMERGENCIES</h3>
+                <p>In the event of a Dog medical emergency, every reasonable effort will be made to contact the Dog Owner or emergency contact immediately. If you or your emergency contact cannot be reached, Hound Dogs are authorised to seek the veterinary care necessary for the dog's health and safety. We will first attempt to visit your registered Veterinary practice however if this is not possible, we will use Hound Dogs registered Vet, Vets 4 Pets, St James.</p>
+                
+                <p>The Dog Owner is responsible for all associated veterinary expenses. If your dog show signs on Infectious, Contagious disease during their stay they will need to be Isolated away from other Dogs boarded with Hound Dogs. If this unlikely event occurred, your Dog would move to Vets 4 Pets isolation unit and be cared for there until they have recovered, or until you can collect them.</p>
+                
+                <h3>YOUR DOG</h3>
+                <p>You agree to provide full, honest and detailed information in the Booking Form about your dog/s and agree to our terms and conditions. We are unable to accept dogs with aggression problems towards other dogs or people and subject to the terms of the Dangerous Dogs Act 1991. We are happy to accept bookings for un-spayed bitches, however if you believe your dog is due in season during her board you must inform us. We may have un-neutered dogs booked for the same period.</p>
+                
+                <p>If you prefer/agree to your dog being exercised off lead, please note the booking form accordingly. In doing so you accept responsibility for third party liability. Hound Dogs will care for your dog as you would, and whilst we will make every effort to ensure your dog/s is cared for to our usual high standards we cannot be liable for loss, injury or death either inside or outside of our home whilst in our care.</p>
+                
+                <p>Your dog is expected to always be under control, trained and not over boisterous in the home. You confirm that your dog has not been ill with any contagious disease or condition within the past 30 days and that your dog has received all the necessary vaccinations.</p>
+                
+                <p>Any conditions requiring the administration of medicine to the dog/s must be fully discussed with the Hound Dogs. Dosage rates etc should be given to Hound Dogs in writing before their stay. Any changes in medication must be communicated prior to their stay.</p>
+                
+                <p>You agree your dog may be homed with other Dogs staying with Hound Dogs. All Dogs boarded will agree to the same Terms & Conditions.</p>
+                
+                <p>You authorise Hound Dogs to use photographs and video recordings taken of your Dog during the boarding services for promotional, marketing, and advertising purposes, which may include but are not limited to website content and Social Media posts.</p>
+                
+                <p>By booking with Hound Dogs, you agree to our terms and conditions.</p>
+                
+                <p>Licenced with West Northants Council AWL0014</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer with improved social media icons -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-logo">
-                <img src="image/logodog.png" alt="Hound Dogs Logo">
+                <img src="image/HOUND (4).png" alt="Hound Dogs Logo">
             </div>
             <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#services">Our Services</a>
+                <a href="#hotel">About Us</a>
                 <a href="#gallery">Gallery</a>
-                <a href="#about">About Us</a>
+                <a href="#services">Our Services</a>
                 <a href="#reviews">Testimonials</a>
                 <a href="#faq">FAQ</a>
                 <a href="#contact">Contact</a>
-                <a href="#terms">Terms & Conditions</a>
             </div>
             
-            <!-- Improved social media links with brand colors -->
             <div class="social-links">
-                <a href="#" class="social-icon" aria-label="Facebook">
+                <a href="https://www.facebook.com/share/1B1rdE34TC/" class="social-icon" aria-label="Facebook" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 </a>
-                <a href="#" class="social-icon" aria-label="Instagram">
+                <a href="https://www.instagram.com/hound_dogs_npton?igsh=MTN1MmNmM2dzbGF0NQ==" class="social-icon" aria-label="Instagram" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
-                <a href="#" class="social-icon" aria-label="Twitter">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                <a href="https://www.instagram.com/hound_dogs_npton?igsh=MTN1MmNmM2dzbGF0NQ==" class="social-icon" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 </a>
             </div>
             
@@ -1475,77 +1913,370 @@
         </div>
     </footer>
     
-    <!-- Back to top button -->
+    <!-- Enhanced Back to top button -->
     <div class="back-to-top" tabindex="0" aria-label="Back to top">↑</div>
 
-    <!-- JavaScript for interaction -->
+    <!-- JavaScript for interaction - FIXED -->
     <script>
-        // Back to Top Button
-        const backToTopButton = document.querySelector('.back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.add('visible');
+        // Immediately execute this as soon as the script loads for hamburger menu
+        (function initHamburger() {
+            // Get hamburger menu elements
+            const hamburger = document.querySelector('.hamburger-container');
+            const navMenu = document.querySelector('nav ul');
+            
+            if (hamburger && navMenu) {
+                console.log('Hamburger menu found!');
+                
+                // Force hamburger to be visible if on mobile
+                if (window.innerWidth <= 768) {
+                    hamburger.style.display = 'flex';
+                }
+                
+                // Add click event
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default behavior
+                    e.stopPropagation(); // Stop event bubbling
+                    console.log('Hamburger clicked');
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking nav links
+                document.querySelectorAll('nav ul li a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
             } else {
-                backToTopButton.classList.remove('visible');
+                console.error('Hamburger menu elements not found!');
             }
-        });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        })();
+
+        // Main content initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to Top Button
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
             });
-        });
-        
-        backToTopButton.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
+            
+            backToTopButton.addEventListener('click', () => {
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
-            }
-        });
-        
-        // FAQ Accordion - Enhanced version
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', toggleAccordion);
-            question.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    toggleAccordion(e);
-                }
-            });
-        });
-        
-        function toggleAccordion(e) {
-            const item = e.currentTarget.parentElement;
-            const isActive = item.classList.contains('active');
-            
-            // Close all other items
-            faqItems.forEach(otherItem => {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
             });
             
-            // Toggle the clicked item
-            if (!isActive) {
-                item.classList.add('active');
-                e.currentTarget.setAttribute('aria-expanded', 'true');
-            }
-        }
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', toggleAccordion);
+                question.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        toggleAccordion(e);
+                    }
                 });
             });
+            
+            function toggleAccordion(e) {
+                const item = e.currentTarget.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                });
+                
+                // Toggle the clicked item
+                if (!isActive) {
+                    item.classList.add('active');
+                    e.currentTarget.setAttribute('aria-expanded', 'true');
+                }
+            }
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Gallery Carousel Implementation
+            const galleryImages = [
+                { src: "image/20220518_190734.jpg", alt: "Small Dog on Couch" },
+                { src: "image/20240809-DSC00856.jpg", alt: "White Dog Close-up" },
+                { src: "image/20250105_125527 (1).jpg", alt: "Yellow Dog Outside" },
+                { src: "image/20240720-DSC00687.jpg", alt: "Brown Dog Portrait" },
+                { src: "image/20230511_122506.jpg", alt: "Two Dogs Together" },
+                { src: "image/20240722-DSC00715.jpg", alt: "Dog on Beach" },
+                { src: "image/20250114-DSC01240-2.jpg", alt: "White Dog Portrait" },
+                { src: "image/20240722-DSC00706.jpg", alt: "Climbing Dog" },
+                { src: "image/20250208-DSC01420.jpg", alt: "Dog Close-up" },
+                { src: "image/20240809-DSC00811.jpg", alt: "Golden Dogs" },
+                { src: "image/20250103_155112.jpg", alt: "Dog Portrait" },
+                { src: "image/20250103_153630.jpg", alt: "Dog Photo" },
+                { src: "image/20240901_162811.jpg", alt: "Dog Closeup" },
+                { src: "image/20230610_173853 (1).jpg", alt: "Dog Outdoor" },
+                { src: "image/20241226_222600.jpg", alt: "Happy Dog" }
+            ];
+            
+            // Generate gallery slides
+            const galleryCarousel = document.getElementById('gallery-carousel');
+            const galleryIndicators = document.getElementById('gallery-indicators');
+            
+            if (galleryCarousel && galleryIndicators) {
+                galleryImages.forEach((image, index) => {
+                    // Create slide
+                    const slide = document.createElement('div');
+                    slide.className = 'gallery-slide';
+                    slide.innerHTML = `
+                        <div class="gallery-item">
+                            <div class="gallery-frame">
+                                <img src="${image.src}" alt="${image.alt}" class="gallery-image">
+                            </div>
+                        </div>
+                    `;
+                    galleryCarousel.appendChild(slide);
+                    
+                    // Create indicator
+                    const indicator = document.createElement('div');
+                    indicator.className = 'carousel-indicator';
+                    if (index === 0) indicator.classList.add('active');
+                    indicator.dataset.index = index;
+                    indicator.addEventListener('click', () => {
+                        moveToSlide(index);
+                    });
+                    galleryIndicators.appendChild(indicator);
+                });
+                
+                // Gallery Carousel Navigation
+                let currentSlide = 0;
+                
+                function moveToSlide(index) {
+                    currentSlide = index;
+                    
+                    // Handle wrapping
+                    if (currentSlide < 0) currentSlide = galleryImages.length - 1;
+                    if (currentSlide >= galleryImages.length) currentSlide = 0;
+                    
+                    galleryCarousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    
+                    // Update indicators
+                    document.querySelectorAll('.carousel-indicator').forEach((indicator, i) => {
+                        if (i === currentSlide) {
+                            indicator.classList.add('active');
+                        } else {
+                            indicator.classList.remove('active');
+                        }
+                    });
+                }
+                
+                // Gallery Navigation Buttons
+                document.querySelector('.carousel-prev').addEventListener('click', () => {
+                    moveToSlide(currentSlide - 1);
+                });
+                
+                document.querySelector('.carousel-next').addEventListener('click', () => {
+                    moveToSlide(currentSlide + 1);
+                });
+                
+                // Auto-advance gallery
+                setInterval(() => {
+                    moveToSlide(currentSlide + 1);
+                }, 5000);
+            }
+
+            // Review Slider - FIXED
+            const reviewsData = [
+                {
+                    author: "Emily B.",
+                    date: "Doggy Day Care • Feb 27, 2025",
+                    content: "Georgina did us a massive favour by having Murphy on a very last minute booking! It was so appreciated that she could squeeze us in. Georgina was great at communicating throughout the day & we even got some lovely pictures from Murphy's day out. Would 100% use again! Thank you!"
+                },
+                {
+                    author: "Adam F.",
+                    date: "Dog Boarding • Feb 22, 2025",
+                    content: "Lenny looked at home right away, and after picking him up we already made arrangements to re book him here again 😀"
+                },
+                {
+                    author: "Bijal R.",
+                    date: "Doggy Day Care • Jan 18, 2025",
+                    content: "We left Ruby for a day with Georgina - and she had a great time. Georgina is professional with great communication, offering a meet/greet before the day which is always helpful. Ruby had a fantastic day with Georgina, and Luna. She didn't want to leave, and is already looking forward to another visit/stay."
+                },
+                {
+                    author: "Chez W.",
+                    date: "Dog Boarding • Nov 21, 2024",
+                    content: "Georgie and Luna are the best!!!"
+                },
+                {
+                    author: "Chez W.",
+                    date: "Dog Boarding • Nov 16, 2024",
+                    content: "Super service. Prince loved his time with Georgina and Luna. Will definitely be booking again."
+                },
+                {
+                    author: "Nadine B.",
+                    date: "Drop-In Visits • Oct 09, 2024",
+                    content: "Georgina is lovely with my dog and is so flexible around my crazy schedule changes! Thank you!"
+                },
+                {
+                    author: "Amaka A.",
+                    date: "Dog Boarding • Oct 05, 2024",
+                    content: "I booked Georgina after my dog sitter cancelled on me. She was amazing with him and kept me updated with all his activities. Thank you so much Georgina."
+                },
+                {
+                    author: "Callum M.",
+                    date: "Dog Boarding • Aug 13, 2024",
+                    content: "We was going in a family holiday and was let down a week before we was set to fly. We contacted Georgina 5 days before we was due to fly and met her the same day to introduce our dog Ralph to her. From the minute we met Georgina we knew Ralph would be in safe hands! Georgina was amazing the whole time sending regular updates of Ralph as well as giving him a lovely home for the 12 days we was away. I can't recommend Georgina enough! We will 100% be contacting Georgina again for whenever we need someone to look after Ralph."
+                },
+                {
+                    author: "Rochelle T.",
+                    date: "Dog Boarding • Aug 06, 2024",
+                    content: "Georgina was fantastic, very reassuring and happy to do an extra meet and greet as this was the first time my dogs were staying with unfamiliar people and home for 2 days. The dogs got on well with her dog and they appeared happy and had taken well to Georgina! I got lovely pictures during their stay and reassuring messages. Georgina and her partner were lovely people and very friendly! Would definitely recommend! And look forward to our next stay!"
+                },
+                {
+                    author: "Samantha S.",
+                    date: "Dog Boarding • Jul 27, 2024",
+                    content: "Georgina really helped us out by taking our dog Kumo very last minute. He instantly felt at home with her and loved playing with her beautiful dog Luna. She sent us lovely photos and updates each day and I knew Kumo was in very good hands and being well cared for. I honestly think his holiday with Georgina was as good as ours. Thank you Georgina for making Kumo's time with you so happy and fun."
+                },
+                {
+                    author: "Tiffany F.",
+                    date: "Jul 08, 2024",
+                    content: "I am so happy to have met Georgina, I received lots of updates/photos and Lola got on really well with Georgina's dog. Will defiantly use her next time Lola needs care. Thank you so much!! x"
+                },
+                {
+                    author: "Gedd D.",
+                    date: "Jun 27, 2024",
+                    content: "Georgie looked after my Dog Jasper in May 2024 whilst I was attending a Wedding in Portugal. Georgie met Jasper a week before and I was confident he would be in good hands. Georgie also sent daily photos which was nice unexpected touch. Great service!"
+                }
+            ];
+            
+            // SIMPLE SLIDE SHOW FOR REVIEWS - FIXED
+            const reviewSlider = document.getElementById('review-slider');
+            const reviewNav = document.getElementById('review-nav');
+            
+            if (reviewSlider && reviewNav) {
+                let currentReview = 0;
+                
+                // Create review slides
+                reviewsData.forEach((review, index) => {
+                    // Create slide
+                    const slide = document.createElement('div');
+                    slide.className = index === 0 ? 'review-slide active' : 'review-slide';
+                    slide.innerHTML = `
+                        <div class="review-card">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-service-date">${review.date}</div>
+                            <div class="review-content">${review.content}</div>
+                            <div class="review-author">— ${review.author}</div>
+                        </div>
+                    `;
+                    reviewSlider.appendChild(slide);
+                    
+                    // Create nav dot
+                    const dot = document.createElement('div');
+                    dot.className = index === 0 ? 'review-dot active' : 'review-dot';
+                    dot.dataset.index = index;
+                    dot.addEventListener('click', () => {
+                        showReview(index);
+                    });
+                    reviewNav.appendChild(dot);
+                });
+                
+                // Show a specific review - FIXED to handle height adjustment
+                function showReview(index) {
+                    // Handle wrapping
+                    if (index < 0) index = reviewsData.length - 1;
+                    if (index >= reviewsData.length) index = 0;
+                    
+                    currentReview = index;
+                    
+                    // Update slides
+                    const slides = reviewSlider.querySelectorAll('.review-slide');
+                    slides.forEach((slide, i) => {
+                        if (i === currentReview) {
+                            slide.classList.add('active');
+                            // Adjust container height to match current slide height
+                            setTimeout(() => {
+                                let slideHeight = slide.offsetHeight;
+                                reviewSlider.style.minHeight = slideHeight + 'px';
+                            }, 50); // Small delay to ensure content is rendered
+                        } else {
+                            slide.classList.remove('active');
+                        }
+                    });
+                    
+                    // Update dots
+                    const dots = reviewNav.querySelectorAll('.review-dot');
+                    dots.forEach((dot, i) => {
+                        if (i === currentReview) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                }
+                
+                // Review Navigation Buttons
+                document.querySelector('.review-prev').addEventListener('click', () => {
+                    showReview(currentReview - 1);
+                });
+                
+                document.querySelector('.review-next').addEventListener('click', () => {
+                    showReview(currentReview + 1);
+                });
+                
+                // Auto-advance reviews
+                setInterval(() => {
+                    showReview(currentReview + 1);
+                }, 8000);
+                
+                // Initial height adjustment
+                window.addEventListener('load', () => {
+                    const activeSlide = reviewSlider.querySelector('.review-slide.active');
+                    if (activeSlide) {
+                        let slideHeight = activeSlide.offsetHeight;
+                        reviewSlider.style.minHeight = slideHeight + 'px';
+                    }
+                });
+                
+                // Adjust height on window resize
+                window.addEventListener('resize', () => {
+                    showReview(currentReview);
+                });
+            }
+            
+            // Terms & Conditions toggle
+            const termsToggle = document.getElementById('terms-toggle');
+            const termsContent = document.getElementById('terms-content');
+            
+            if (termsToggle && termsContent) {
+                termsToggle.addEventListener('click', () => {
+                    termsContent.classList.toggle('active');
+                    
+                    if (termsContent.classList.contains('active')) {
+                        termsToggle.textContent = 'Hide Terms & Conditions';
+                        // Smooth scroll to terms
+                        setTimeout(() => {
+                            termsContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 300);
+                    } else {
+                        termsToggle.textContent = 'View Terms & Conditions';
+                    }
+                });
+            }
         });
     </script>
 </body>
